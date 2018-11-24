@@ -1,6 +1,6 @@
 using MakeTen.Presentation.Presenter.Interface;
 
-namespace DefaultNamespace
+namespace MakeTen.Domain.Model.Game
 {
     public interface IResultView : IView
     {

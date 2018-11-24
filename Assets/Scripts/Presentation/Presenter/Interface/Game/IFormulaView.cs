@@ -1,3 +1,4 @@
+using MakeTen.Domain.Model.Game;
 using MakeTen.Domain.UseCase.Game;
 
 namespace MakeTen.Presentation.Presenter.Interface.Game

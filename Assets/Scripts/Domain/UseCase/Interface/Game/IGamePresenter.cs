@@ -1,5 +1,6 @@
 using System;
 using Application;
+using MakeTen.Domain.Model.Game;
 using MakeTen.Domain.UseCase.Game;
 
 namespace MakeTen.Domain.UseCase.Interface.Game
@@ -11,5 +12,7 @@ namespace MakeTen.Domain.UseCase.Interface.Game
         void RenderFormula(FormulaModel formula);
 
         IObservable<Enumerate.Operation> OnSelectOperation();
+        
+        
     }
 }

@@ -1,4 +1,4 @@
-using DefaultNamespace;
+using MakeTen.Domain.Model.Game;
 using Domain.UseCase.Result;
 using Presentation.Presenter.Result;
 using UnityEngine;
@@ -6,7 +6,7 @@ using Zenject;
 
 namespace MakeTen.Application.Installer.Scene
 {
-    public class ResultInstaller : MonoInstaller<ResultInstaller>
+    public sealed class ResultInstaller : MonoInstaller<ResultInstaller>
     {
         [SerializeField] private ResultView resultView;
         [SerializeField] private ReturnTitleButtonView returnTitleButtonView;

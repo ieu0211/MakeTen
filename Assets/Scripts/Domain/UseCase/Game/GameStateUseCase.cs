@@ -1,7 +1,12 @@
 using System;
 using System.Linq;
 using Application;
+using Maketen.Data.Repository.Game;
+using MaketTen.Data.Entity.Game;
+using MakeTen.Domain.Model.Game;
 using MakeTen.Application;
+using MakeTen.Domain.Translator.Game;
+using MakeTen.Domain.Translator.Interface;
 using MakeTen.Domain.UseCase.Interface;
 using MakeTen.Domain.UseCase.Interface.Game;
 using MakeTen.Domain.UseCase.Title;
@@ -22,30 +27,41 @@ namespace MakeTen.Domain.UseCase.Game
     
     public class GameStateUseCase : IGameStateUseCase, IInitializable
     {
-        [Inject] private IGamePresenter _gamePresenter { get; }
+        
+        
+        
+        //[Inject] private IFactory<IFormulaModel> FormulaModelFactory { get; }
 
         private ReactiveProperty<FormulaModel> _formula = new ReactiveProperty<FormulaModel>();
-        private int score = 0;
+        //private int score = 0;
+
+        [Inject] private IGameStateRepository gameStateRepository { get; }
+        [Inject] private IGameStateTranslator gameStateTranslator { get; }
+     
+        [Inject] private IGameResultRepository gameResultRepository { get; }
+        [Inject] private IGameResultTranslator gameResultTranslator { get; }
         
-        // ほんとうはmodelにする
-        private ISubject<Unit> OnCorrectSubject { get; } = new Subject<Unit>();
-        private ISubject<Unit> OnIncorrectSubject { get; } = new Subject<Unit>();
-        //private ISubject<Unit> TimeUpSubject { get; } = new Subject<Unit>();
+        [Inject] private IGamePresenter gamePresenter { get; }
         
+     
+
         public void Initialize()
-        {   
-            // Timer
-            var remainingTime = new ReactiveProperty<float>(Constant.PlayTime);
+        {
+            var gameStateEntity = gameStateRepository.GameStateEntity;
+            var gameStateModel = gameStateTranslator.Translate(gameStateEntity);
+
+            var gameResultEntity = gameResultRepository.GameResultEntity;
+            var gameResultModel = gameResultTranslator.Translate(gameResultEntity);
             
             Observable
                 .EveryUpdate()
-                .Subscribe(_ => remainingTime.Value -= Time.deltaTime);
+                .Subscribe(_ => gameStateModel.RemainingTime.Value -= Time.deltaTime);
 
-            remainingTime
+            gameStateModel.RemainingTime
                 .Where(x => x >= 0.0f)
-                .Subscribe(x => _gamePresenter.RenderTimer(x));
+                .Subscribe(x => gamePresenter.RenderTimer(x));
 
-            remainingTime
+            gameStateModel.RemainingTime
                 .Where(x => x < 0.0f)
                 .First()
                 .Subscribe(_ => SceneManager.LoadSceneAsync(Constant.SceneName.Result));
@@ -54,7 +70,7 @@ namespace MakeTen.Domain.UseCase.Game
             // まずはじめに表示
             _formula.Value = FormulaModel.Create();
             // 正解したら変更
-            OnCorrectSubject
+            gameStateModel.OnCorrectSubject
                 .Subscribe(_ =>
                 {
                     _formula.Value = FormulaModel.Create();
@@ -62,96 +78,26 @@ namespace MakeTen.Domain.UseCase.Game
 
             // ひょうじ
             _formula
-                .Subscribe(x => _gamePresenter.RenderFormula(x));
+                .Subscribe(x => gamePresenter.RenderFormula(x));
             
             // operation
-            _gamePresenter
+            gamePresenter
                 .OnSelectOperation()// マージ？する
                 .Subscribe(x =>
                 {
                     if (_formula.Value.IsCorrect(x))
-                        OnCorrectSubject.OnNext(Unit.Default);
+                        gameStateModel.OnCorrectSubject.OnNext(Unit.Default);
                     else
-                        OnIncorrectSubject.OnNext(Unit.Default);
+                        gameStateModel.OnIncorrectSubject.OnNext(Unit.Default);
                 });
 
             // Score
-            OnCorrectSubject
+            gameStateModel.OnCorrectSubject
                 .Subscribe(_ =>
                 {
-                    score++;
-                    _gamePresenter.RenderScore(score);
+                    gameResultModel.Score.Value++;
+                    gamePresenter.RenderScore(gameResultModel.Score.Value);
                 });
-        }
-    }
-
-    public class FormulaModel
-    {
-        public int leftNumber;
-
-        public int rightNumber
-        {
-            get
-            {
-                switch (Operation)
-                {
-                    case Enumerate.Operation.Plus:
-                        return 10 - leftNumber;
-                    case Enumerate.Operation.Minus:
-                        return 10 + leftNumber;
-                    case Enumerate.Operation.Multiply:
-                        return 10 / leftNumber;
-                    case Enumerate.Operation.Divide:
-                        return 10 * leftNumber;
-                    default:
-                        throw new Exception();                    
-                }
-            }
-        }
-        
-        private Enumerate.Operation Operation;
-
-        public static FormulaModel Create()
-        {
-            var model = new FormulaModel();
-
-            var random = new System.Random();
-            while (true)
-            {
-                model.leftNumber = Random.Range(1, 1000);
-                model.Operation = Enum.GetValues(typeof(Enumerate.Operation)).Cast<Enumerate.Operation>().OrderBy(x => random.Next()).FirstOrDefault();
-                if (model.Check())
-                    break;
-            }
-            
-            return model;
-        }
-
-        public bool IsCorrect(Enumerate.Operation operation)
-        {
-            return operation == Operation;
-        }
-
-        private bool Check()
-        {
-            if (leftNumber <= 0 || rightNumber <= 0)
-            {
-                return false;
-            }
-            
-            switch (Operation)
-            {
-                case Enumerate.Operation.Plus:
-                    return leftNumber + rightNumber == 10;
-                case Enumerate.Operation.Minus:
-                    return leftNumber - rightNumber == 10;
-                case Enumerate.Operation.Multiply:
-                    return leftNumber * rightNumber == 10;
-                case Enumerate.Operation.Divide:
-                    return leftNumber / rightNumber == 10;
-                default:
-                    return false;                    
-            }
         }
     }
 }

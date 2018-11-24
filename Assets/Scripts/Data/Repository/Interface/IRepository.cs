@@ -1,4 +1,4 @@
-namespace Domain.Repository
+namespace Domain.Repository.Interface
 {
     public interface IRepository
     {

@@ -9,6 +9,6 @@ namespace MakeTen.Application
             public const string Result = "Result";
         }
 
-        public const float PlayTime = 10f;
+        public const float RemainingTime = 10f;
     }
 }

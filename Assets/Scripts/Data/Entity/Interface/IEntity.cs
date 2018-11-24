@@ -1,4 +1,4 @@
-namespace DefaultNamespace
+namespace Maketen.Data.Entity
 {
     public interface IEntity
     {

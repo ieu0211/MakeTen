@@ -2,7 +2,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-namespace DefaultNamespace
+namespace MakeTen.Domain.Model.Game
 {
     public class ResultView : UIBehaviour, IResultView
     {

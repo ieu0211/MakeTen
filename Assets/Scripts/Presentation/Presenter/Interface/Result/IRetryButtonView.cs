@@ -2,7 +2,7 @@ using System;
 using MakeTen.Presentation.Presenter.Interface;
 using UniRx;
 
-namespace DefaultNamespace
+namespace MakeTen.Domain.Model.Game
 {
     public interface IRetryButtonView : IView
     {

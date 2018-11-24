@@ -1,5 +1,6 @@
 using System;
 using Application;
+using MakeTen.Domain.Model.Game;
 using MakeTen.Domain.UseCase.Game;
 using MakeTen.Domain.UseCase.Interface.Game;
 using MakeTen.Presentation.Presenter.Interface.Game;
@@ -50,8 +51,6 @@ namespace MakeTen.Presentation.Presenter.Game
                 divideButtonView.OnClickAsObservable()
                 
                 );
-            
-            return _plusButtonView.OnClickAsObservable();
         }
     }
 }

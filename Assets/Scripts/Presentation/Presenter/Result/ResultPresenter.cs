@@ -1,5 +1,5 @@
 using System;
-using DefaultNamespace;
+using MakeTen.Domain.Model.Game;
 using MakeTen.Domain.UseCase.Interface.Result;
 using UniRx;
 using Zenject;

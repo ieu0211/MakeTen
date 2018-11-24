@@ -3,7 +3,7 @@ using UniRx;
 using UniRx.Triggers;
 using UnityEngine.EventSystems;
 
-namespace DefaultNamespace
+namespace MakeTen.Domain.Model.Game
 {
     public class RetryButtonView : UIBehaviour, IRetryButtonView
     {

@@ -1,3 +1,8 @@
+using Maketen.Data.Repository.Game;
+using MaketTen.Data.Entity.Game;
+using MakeTen.Domain.Model.Game;
+using MakeTen.Domain.Translator.Game;
+using MakeTen.Domain.Translator.Interface;
 using MakeTen.Domain.UseCase.Game;
 using MakeTen.Presentation.Presenter.Game;
 using MakeTen.Presentation.View.Game;
@@ -19,6 +24,19 @@ namespace MakeTen.Application.Installer.Scene
         
         public override void InstallBindings()
         {
+            // Entities
+            Container.Bind<IGameStateEntity>().To<GameStateEntity>().AsCached();
+            Container.Bind<IGameResultEntity>().To<GameResultEntity>().AsCached();
+            
+            // Repositories
+            //Container.BindInterfacesTo<IGameStateRepository>().AsCached();
+            Container.Bind<IGameStateRepository>().To<GameStateRepository>().AsCached();
+            Container.Bind<IGameResultRepository>().To<GameResultRepository>().AsCached();
+            
+            // Translators
+            Container.BindInterfacesTo<GameStateTranslator>().AsCached();
+            Container.BindInterfacesTo<GameResultTranslator>().AsCached();
+            
             // UseCases
             Container.BindInterfacesTo<GameStateUseCase>().AsCached();
 
@@ -33,6 +51,7 @@ namespace MakeTen.Application.Installer.Scene
             Container.BindInterfacesTo<MinusButtonView>().FromInstance(minusButtonView).AsCached();
             Container.BindInterfacesTo<MultiplyButtonView>().FromInstance(multiplyButtonView).AsCached();
             Container.BindInterfacesTo<DivideButtonView>().FromInstance(divideButtonView).AsCached();
+            
         }
     }
 }
