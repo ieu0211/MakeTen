@@ -2,16 +2,14 @@ using System;
 using Application;
 using MakeTen.Application.Manager;
 using MakeTen.Domain.Model.Game;
-using MakeTen.Domain.UseCase.Game;
 using MakeTen.Domain.UseCase.Interface.Game;
 using MakeTen.Presentation.Presenter.Interface.Game;
 using UniRx;
-using Unity.Jobs;
 using Zenject;
 
 namespace MakeTen.Presentation.Presenter.Game
 {
-    public class GamePresenter : IGamePresenter, IInitializable
+    public sealed class GamePresenter : IGamePresenter, IInitializable
     {
         [Inject] private SoundManager soundManager { get; }
         [Inject] private ITimerView timerView { get; }

@@ -1,10 +1,6 @@
-using System;
 using System.Collections.Generic;
-using System.Linq;
 using Application;
-using MakeTen.Application;
 using MakeTen.Domain.Model.Interface;
-using UnityEngine;
 
 namespace MakeTen.Domain.Model.Game
 {
@@ -18,12 +14,10 @@ namespace MakeTen.Domain.Model.Game
         bool IsCorrect(Enumerate.Operation operation);
     }
     
-    public class FormulaModel : IFormulaModel
+    public sealed class FormulaModel : IFormulaModel
     {
         public int LeftNumber { get; }
-
         public int RightNumber { get; }
-
         public Enumerate.Operation Operation { get; }
         
         /*

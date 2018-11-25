@@ -5,13 +5,13 @@ using UnityEngine.EventSystems;
 
 namespace MakeTen.Presentation.View.Game
 {
-    public class ScoreView : UIBehaviour, IScoreView
+    public sealed class ScoreView : UIBehaviour, IScoreView
     {
-        [SerializeField] private TextMeshProUGUI _Label;
+        [SerializeField] private TextMeshProUGUI label;
         
         public void RenderScore(int score)
         {
-            _Label.text = $"{score}点";
+            label.text = $"{score}点";
         }
     }
 }

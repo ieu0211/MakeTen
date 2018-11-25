@@ -1,6 +1,5 @@
 using MaketTen.Data.Entity.Game;
 using MakeTen.Domain.Model.Game;
-using MakeTen.Domain.Translator.Interface;
 using MakeTen.Domain.Translator.Interface.ITranslator;
 
 namespace MakeTen.Domain.Translator.Game
@@ -11,7 +10,7 @@ namespace MakeTen.Domain.Translator.Game
     {
     }
     
-    public class GameResultTranslator : IGameResultTranslator
+    public sealed class GameResultTranslator : IGameResultTranslator
     {
         public IGameResultModel Translate(IGameResultEntity entity)
         {

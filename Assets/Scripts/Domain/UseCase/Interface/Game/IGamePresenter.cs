@@ -1,7 +1,6 @@
 using System;
 using Application;
 using MakeTen.Domain.Model.Game;
-using MakeTen.Domain.UseCase.Game;
 
 namespace MakeTen.Domain.UseCase.Interface.Game
 {

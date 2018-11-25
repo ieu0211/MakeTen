@@ -1,13 +1,8 @@
 using Maketen.Data.Repository.Game;
-using MaketTen.Data.Entity.Game;
-using MakeTen.Application.Manager;
-using MakeTen.Domain.Model.Game;
 using MakeTen.Domain.Translator.Game;
-using MakeTen.Domain.Translator.Interface;
 using MakeTen.Domain.UseCase.Game;
 using MakeTen.Presentation.Presenter.Game;
 using MakeTen.Presentation.View.Game;
-using TMPro;
 using UnityEngine;
 using Zenject;
 

@@ -1,23 +1,13 @@
-using System;
-using System.Linq;
-using Application;
 using Maketen.Data.Repository.Game;
-using MaketTen.Data.Entity.Game;
 using MakeTen.Domain.Model.Game;
 using MakeTen.Application;
 using MakeTen.Domain.Translator.Game;
-using MakeTen.Domain.Translator.Interface;
 using MakeTen.Domain.UseCase.Interface;
 using MakeTen.Domain.UseCase.Interface.Game;
-using MakeTen.Domain.UseCase.Title;
-using MakeTen.Presentation.Presenter.Game;
-using MakeTen.Presentation.Presenter.Interface.Game;
 using UniRx;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using UnityEngine.UIElements;
 using Zenject;
-using Random = UnityEngine.Random;
 
 namespace MakeTen.Domain.UseCase.Game
 {
@@ -25,7 +15,8 @@ namespace MakeTen.Domain.UseCase.Game
     {
     }
     
-    public class GameStateUseCase : IGameStateUseCase, IInitializable
+    // TODO: UseCaseの粒度を高める
+    public sealed class GameStateUseCase : IGameStateUseCase, IInitializable
     {
         [Inject] private IGameStateRepository gameStateRepository { get; }
         [Inject] private IGameStateModelTranslator gameStateModelTranslator { get; }

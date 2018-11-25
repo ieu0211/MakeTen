@@ -11,7 +11,7 @@ using Zenject;
 
 namespace MakeTen.Presentation.View.Game
 {
-    public class DivideButtonView : UIBehaviour, IDivideButtonView
+    public sealed class DivideButtonView : UIBehaviour, IDivideButtonView
     {
         [Inject] private SoundManager soundManager { get; }
         

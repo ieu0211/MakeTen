@@ -1,5 +1,4 @@
 using Application;
-using MakeTen.Application;
 using MakeTen.Domain.Model.Interface;
 using UniRx;
 

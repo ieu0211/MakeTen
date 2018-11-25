@@ -11,7 +11,8 @@ using DG.Tweening;
 
 namespace MakeTen.Presentation.View.Game
 {
-    public class PlusButtonView : UIBehaviour, IPlusButtonView
+    // TODO: 各ボタンの処理を共通化（IdでBindする？）
+    public sealed class PlusButtonView : UIBehaviour, IPlusButtonView
     {
         [Inject] private SoundManager soundManager { get; }
 

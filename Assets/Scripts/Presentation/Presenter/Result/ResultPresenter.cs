@@ -7,7 +7,7 @@ using Zenject;
 
 namespace Presentation.Presenter.Result
 {
-    public class ResultPresenter : IResultPresenter, IInitializable
+    public sealed class ResultPresenter : IResultPresenter, IInitializable
     {
         [Inject] private SoundManager soundManager { get; }
         [Inject] private IResultView resultView;

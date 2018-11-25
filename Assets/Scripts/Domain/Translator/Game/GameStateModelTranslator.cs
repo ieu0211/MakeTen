@@ -1,7 +1,5 @@
 using MaketTen.Data.Entity.Game;
 using MakeTen.Domain.Model.Game;
-using MakeTen.Domain.Model.Interface;
-using MakeTen.Domain.Translator.Interface;
 using MakeTen.Domain.Translator.Interface.ITranslator;
 
 namespace MakeTen.Domain.Translator.Game
@@ -10,7 +8,7 @@ namespace MakeTen.Domain.Translator.Game
     {
     }
     
-    public class GameStateModelTranslator : IGameStateModelTranslator
+    public sealed class GameStateModelTranslator : IGameStateModelTranslator
     {
         public IGameStateModel Translate(IGameStateEntity entity)
         {

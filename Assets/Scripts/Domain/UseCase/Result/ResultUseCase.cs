@@ -1,4 +1,3 @@
-using System.ComponentModel;
 using Maketen.Data.Repository.Game;
 using MakeTen.Application;
 using MakeTen.Domain.Translator.Game;
@@ -12,10 +11,9 @@ namespace Domain.UseCase.Result
 {
     public interface IResultUseCase : IUseCase
     {
-        
     }
     
-    public class ResultUseCase : IResultUseCase, IInitializable
+    public sealed class ResultUseCase : IResultUseCase, IInitializable
     {
         [Inject] private IGameResultRepository gameResultRepository { get; }
         [Inject] private IGameResultTranslator gameResultTranslator { get; }

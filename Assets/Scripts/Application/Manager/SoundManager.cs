@@ -1,9 +1,9 @@
 ﻿using UnityEngine;
-using Zenject;
 
 namespace MakeTen.Application.Manager
 {
-    public class SoundManager : MonoBehaviour
+    // TODO: Interfaceを継承する
+    public sealed class SoundManager : MonoBehaviour
     {
         [SerializeField] private AudioSource audioSource;
         

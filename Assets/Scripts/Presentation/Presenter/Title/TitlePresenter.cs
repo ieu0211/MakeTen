@@ -1,18 +1,13 @@
 ﻿using System;
-using System.Collections;
-using System.Collections.Generic;
 using MakeTen.Application.Manager;
-using MakeTen.Application.Presentation.Presenter.Interface.Title;
-using MakeTen.Domain.UseCase.Interface;
 using MakeTen.Domain.UseCase.Interface.Title;
-using MakeTen.Presentation.Presenter.Interface;
+using MakeTen.Presentation.Presenter.Interface.Title;
 using UniRx;
-using UnityEngine;
 using Zenject;
 
 namespace MakeTen.Presentation.Title
 {
-    public class TitlePresenter : ITitlePresenter, IInitializable
+    public sealed class TitlePresenter : ITitlePresenter, IInitializable
     {
         [Inject] private SoundManager soundManager { get; }
         [Inject] private IStartButtonView startButtonView { get; }

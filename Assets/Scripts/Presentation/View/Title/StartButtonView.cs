@@ -1,12 +1,8 @@
 ﻿using System;
-using System.Collections;
-using System.Collections.Generic;
 using MakeTen.Application.Manager;
-using MakeTen.Application.Presentation.Presenter.Interface.Title;
-using MakeTen.Presentation.Presenter.Interface;
+using MakeTen.Presentation.Presenter.Interface.Title;
 using UniRx;
 using UniRx.Triggers;
-using UnityEngine;
 using UnityEngine.EventSystems;
 using Zenject;
 

@@ -1,12 +1,6 @@
-using System;
 using MakeTen.Application;
-using MakeTen.Application.Manager;
-using MakeTen.Application.Presentation.Presenter.Interface.Title;
 using MakeTen.Domain.UseCase.Interface.Title;
-using TMPro;
 using UniRx;
-using UniRx.Async;
-using UnityEngine;
 using UnityEngine.SceneManagement;
 using Zenject;
 

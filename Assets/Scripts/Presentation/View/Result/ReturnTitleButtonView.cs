@@ -7,7 +7,7 @@ using Zenject;
 
 namespace MakeTen.Domain.Model.Game
 {
-    public class ReturnTitleButtonView : UIBehaviour, IReturnTitleButtonView, IInitializable
+    public sealed class ReturnTitleButtonView : UIBehaviour, IReturnTitleButtonView, IInitializable
     {
         [Inject] private SoundManager soundManager { get; }
         

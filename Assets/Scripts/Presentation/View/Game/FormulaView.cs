@@ -1,5 +1,4 @@
 using MakeTen.Domain.Model.Game;
-using MakeTen.Domain.UseCase.Game;
 using MakeTen.Presentation.Presenter.Interface.Game;
 using TMPro;
 using UnityEngine;
@@ -7,15 +6,15 @@ using UnityEngine.EventSystems;
 
 namespace MakeTen.Presentation.View.Game
 {
-    public class FormulaView : UIBehaviour, IFormulaView
+    public sealed class FormulaView : UIBehaviour, IFormulaView
     {
-        [SerializeField] private TextMeshProUGUI _LeftNumber;
-        [SerializeField] private TextMeshProUGUI _RightNumber;
+        [SerializeField] private TextMeshProUGUI leftNumber;
+        [SerializeField] private TextMeshProUGUI rightNumber;
 
         public void RenderFormula(IFormulaModel formula)
         {
-            _LeftNumber.text = formula.LeftNumber.ToString();
-            _RightNumber.text = formula.RightNumber.ToString();
+            leftNumber.text = formula.LeftNumber.ToString();
+            rightNumber.text = formula.RightNumber.ToString();
         }
     }
 }

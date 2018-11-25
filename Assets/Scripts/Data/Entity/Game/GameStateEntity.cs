@@ -1,6 +1,5 @@
 using Maketen.Data.Entity;
 using MakeTen.Application;
-using UniRx;
 
 namespace MaketTen.Data.Entity.Game
 {

@@ -11,7 +11,7 @@ using Zenject;
 
 namespace MakeTen.Presentation.View.Game
 {
-    public class MultiplyButtonView : UIBehaviour, IMultiplyButtonView
+    public sealed class MultiplyButtonView : UIBehaviour, IMultiplyButtonView
     {
         [Inject] private SoundManager soundManager { get; }
         

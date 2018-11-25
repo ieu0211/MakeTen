@@ -1,5 +1,3 @@
-using System.Globalization;
-using MakeTen.Presentation.Presenter.Interface;
 using MakeTen.Presentation.Presenter.Interface.Game;
 using TMPro;
 using UnityEngine;
@@ -10,11 +8,11 @@ namespace MakeTen.Presentation.View.Game
     public sealed class TimerView : UIBehaviour, ITimerView
     {
         [SerializeField]
-        private TextMeshProUGUI _Text;
+        private TextMeshProUGUI label;
 
         public void Render(float remainingTime)
         {
-            _Text.text = $"{remainingTime:F2}秒";
+            label.text = $"{remainingTime:F2}秒";
         }
     }
 }

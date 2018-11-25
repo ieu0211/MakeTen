@@ -1,6 +1,5 @@
 using System;
 using Application;
-using MakeTen.Domain.Model.Game;
 
 namespace MakeTen.Presentation.Presenter.Interface.Game
 {

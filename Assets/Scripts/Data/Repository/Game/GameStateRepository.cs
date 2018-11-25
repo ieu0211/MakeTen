@@ -1,6 +1,5 @@
 using Domain.Repository.Interface;
 using MaketTen.Data.Entity.Game;
-using Zenject;
 
 namespace Maketen.Data.Repository.Game
 {
@@ -9,7 +8,7 @@ namespace Maketen.Data.Repository.Game
         IGameStateEntity GetEntity();
     }
     
-    public class GameStateRepository : IGameStateRepository
+    public sealed class GameStateRepository : IGameStateRepository
     {
         public IGameStateEntity GetEntity()
         {

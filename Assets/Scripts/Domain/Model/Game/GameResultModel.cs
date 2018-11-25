@@ -8,7 +8,7 @@ namespace MakeTen.Domain.Model.Game
         IReactiveProperty<int> Score { get; }
     }
     
-    public class GameResultModel : IGameResultModel
+    public sealed class GameResultModel : IGameResultModel
     {
         public GameResultModel(int score)
         {

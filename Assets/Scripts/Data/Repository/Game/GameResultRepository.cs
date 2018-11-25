@@ -2,7 +2,6 @@ using Domain.Repository.Interface;
 using MaketTen.Data.Entity.Game;
 using MakeTen.Application;
 using UnityEngine;
-using Zenject;
 
 namespace Maketen.Data.Repository.Game
 {
@@ -13,7 +12,7 @@ namespace Maketen.Data.Repository.Game
         GameResultEntity Read();
     }
     
-    public class GameResultRepository : IGameResultRepository
+    public sealed class GameResultRepository : IGameResultRepository
     {
         public IGameResultEntity GetEntity()
         {

@@ -11,7 +11,7 @@ using Zenject;
 
 namespace MakeTen.Presentation.View.Game
 {
-    public class MinusButtonView : UIBehaviour, IMinusButtonView
+    public sealed class MinusButtonView : UIBehaviour, IMinusButtonView
     {
         [Inject] private SoundManager soundManager { get; }
         
