@@ -67,8 +67,6 @@ namespace MakeTen.Domain.UseCase.Game
                 .OnSelectOperation()
                 .Subscribe(x =>
                 {
-                    Debug.LogError(x);
-                    
                     if (currentFormulaModel.Value.IsCorrect(x))
                         gameStateModel.OnCorrectSubject.OnNext(x);
                     else
