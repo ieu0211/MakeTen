@@ -9,10 +9,8 @@ namespace MakeTen.Domain.UseCase.Interface.Game
     {
         void RenderTimer(float time);
         void RenderScore(int score);
-        void RenderFormula(FormulaModel formula);
+        void RenderFormula(IFormulaModel formula);
 
         IObservable<Enumerate.Operation> OnSelectOperation();
-        
-        
     }
 }

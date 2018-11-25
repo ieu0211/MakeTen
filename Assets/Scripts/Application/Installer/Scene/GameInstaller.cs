@@ -24,17 +24,12 @@ namespace MakeTen.Application.Installer.Scene
         
         public override void InstallBindings()
         {
-            // Entities
-            Container.Bind<IGameStateEntity>().To<GameStateEntity>().AsCached();
-            Container.Bind<IGameResultEntity>().To<GameResultEntity>().AsCached();
-            
             // Repositories
-            //Container.BindInterfacesTo<IGameStateRepository>().AsCached();
             Container.Bind<IGameStateRepository>().To<GameStateRepository>().AsCached();
             Container.Bind<IGameResultRepository>().To<GameResultRepository>().AsCached();
             
             // Translators
-            Container.BindInterfacesTo<GameStateTranslator>().AsCached();
+            Container.BindInterfacesTo<GameStateModelTranslator>().AsCached();
             Container.BindInterfacesTo<GameResultTranslator>().AsCached();
             
             // UseCases

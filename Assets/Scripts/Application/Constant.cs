@@ -10,5 +10,10 @@ namespace MakeTen.Application
         }
 
         public const float RemainingTime = 10f;
+
+        public static class PlayerPrefsKey
+        {
+            public const string LastGameResultScore = "LastGameResultEntity";
+        }
     }
 }

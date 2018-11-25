@@ -12,13 +12,13 @@ namespace MakeTen.Presentation.Presenter.Game
 {
     public class GamePresenter : IGamePresenter
     {
-        [Inject] private ITimerView _timerView { get; }
+        [Inject] private ITimerView timerView { get; }
         
-        [Inject] private IScoreView _scoreView { get; }
+        [Inject] private IScoreView scoreView { get; }
         
-        [Inject] private IFormulaView _formulaView { get; }
+        [Inject] private IFormulaView formulaView { get; }
         
-        [Inject] private IPlusButtonView _plusButtonView { get; }
+        [Inject] private IPlusButtonView plusButtonView { get; }
         
         [Inject] private IMinusButtonView minusButtonView{ get; }
         
@@ -28,29 +28,27 @@ namespace MakeTen.Presentation.Presenter.Game
 
         public void RenderTimer(float time)
         {
-            _timerView.Render(time);
+            timerView.Render(time);
         }
 
         public void RenderScore(int score)
         {
-            _scoreView.RenderScore(score);
+            scoreView.RenderScore(score);
         }
 
-        public void RenderFormula(FormulaModel formula)
+        public void RenderFormula(IFormulaModel formula)
         {
-            _formulaView.RenderFormula(formula);
+            formulaView.RenderFormula(formula);
         }
 
         public IObservable<Enumerate.Operation> OnSelectOperation()
         {
             return Observable.Merge(
-
-                _plusButtonView.OnClickAsObservable(),
+                plusButtonView.OnClickAsObservable(),
                 minusButtonView.OnClickAsObservable(),
                 multiplyButtonView.OnClickAsObservable(),
                 divideButtonView.OnClickAsObservable()
-                
-                );
+            );
         }
     }
 }

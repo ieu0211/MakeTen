@@ -27,77 +27,78 @@ namespace MakeTen.Domain.UseCase.Game
     
     public class GameStateUseCase : IGameStateUseCase, IInitializable
     {
-        
-        
-        
-        //[Inject] private IFactory<IFormulaModel> FormulaModelFactory { get; }
-
-        private ReactiveProperty<FormulaModel> _formula = new ReactiveProperty<FormulaModel>();
-        //private int score = 0;
-
         [Inject] private IGameStateRepository gameStateRepository { get; }
-        [Inject] private IGameStateTranslator gameStateTranslator { get; }
+        [Inject] private IGameStateModelTranslator gameStateModelTranslator { get; }
      
         [Inject] private IGameResultRepository gameResultRepository { get; }
-        [Inject] private IGameResultTranslator gameResultTranslator { get; }
+        [Inject] private IGameResultTranslator GameResultTranslator { get; }
         
         [Inject] private IGamePresenter gamePresenter { get; }
         
-     
-
         public void Initialize()
         {
-            var gameStateEntity = gameStateRepository.GameStateEntity;
-            var gameStateModel = gameStateTranslator.Translate(gameStateEntity);
+            var gameStateEntity = gameStateRepository.GetEntity();
+            var gameStateModel = gameStateModelTranslator.Translate(gameStateEntity);
 
-            var gameResultEntity = gameResultRepository.GameResultEntity;
-            var gameResultModel = gameResultTranslator.Translate(gameResultEntity);
+            var gameResultEntity = gameResultRepository.GetEntity();
+            var gameResultModel = GameResultTranslator.Translate(gameResultEntity);
             
             Observable
                 .EveryUpdate()
                 .Subscribe(_ => gameStateModel.RemainingTime.Value -= Time.deltaTime);
 
-            gameStateModel.RemainingTime
+            gameStateModel
+                .RemainingTime
                 .Where(x => x >= 0.0f)
                 .Subscribe(x => gamePresenter.RenderTimer(x));
 
-            gameStateModel.RemainingTime
+            gameStateModel
+                .RemainingTime
                 .Where(x => x < 0.0f)
                 .First()
-                .Subscribe(_ => SceneManager.LoadSceneAsync(Constant.SceneName.Result));
+                .Subscribe(_ => NavigateToResult(gameResultModel));
             
-            // fomula
-            // まずはじめに表示
-            _formula.Value = FormulaModel.Create();
-            // 正解したら変更
-            gameStateModel.OnCorrectSubject
-                .Subscribe(_ =>
-                {
-                    _formula.Value = FormulaModel.Create();
-                });
+            var currentFormulaModel = new ReactiveProperty<IFormulaModel>(FormulaModelFactory.Create());
 
-            // ひょうじ
-            _formula
+            currentFormulaModel
                 .Subscribe(x => gamePresenter.RenderFormula(x));
             
-            // operation
             gamePresenter
-                .OnSelectOperation()// マージ？する
+                .OnSelectOperation()
                 .Subscribe(x =>
                 {
-                    if (_formula.Value.IsCorrect(x))
+                    Debug.LogError(x);
+                    
+                    if (currentFormulaModel.Value.IsCorrect(x))
                         gameStateModel.OnCorrectSubject.OnNext(Unit.Default);
                     else
                         gameStateModel.OnIncorrectSubject.OnNext(Unit.Default);
                 });
+            
+            gameStateModel
+                .OnCorrectSubject
+                .Subscribe(_ => currentFormulaModel.Value = FormulaModelFactory.Create());
 
-            // Score
-            gameStateModel.OnCorrectSubject
-                .Subscribe(_ =>
-                {
-                    gameResultModel.Score.Value++;
-                    gamePresenter.RenderScore(gameResultModel.Score.Value);
-                });
+            gameStateModel
+                .OnCorrectSubject
+                .Subscribe(_ => IncreaseScore(gameResultModel));
+
+            gameResultModel
+                .Score
+                .Subscribe(x => gamePresenter.RenderScore(x));
+        }
+
+        private void NavigateToResult(IGameResultModel gameResultModel)
+        {
+            var gameResultEntity = GameResultTranslator.Translate(gameResultModel);
+            gameResultRepository.Write(gameResultEntity);
+                    
+            SceneManager.LoadSceneAsync(Constant.SceneName.Result);
+        }
+
+        private void IncreaseScore(IGameResultModel gameResultModel)
+        {
+            gameResultModel.Score.Value++;
         }
     }
 }

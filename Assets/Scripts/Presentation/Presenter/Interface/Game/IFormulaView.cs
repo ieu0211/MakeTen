@@ -5,6 +5,6 @@ namespace MakeTen.Presentation.Presenter.Interface.Game
 {
     public interface IFormulaView : IView
     {
-        void RenderFormula(FormulaModel formula);
+        void RenderFormula(IFormulaModel formula);
     }
 }

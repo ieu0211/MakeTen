@@ -11,7 +11,7 @@ namespace MakeTen.Presentation.View.Game
     {
         public IObservable<Enumerate.Operation> OnClickAsObservable()
         {
-            return this.OnPointerClickAsObservable().Select(_ => Enumerate.Operation.Plus);
+            return this.OnPointerClickAsObservable().Select(_ => Enumerate.Operation.Divide);
         }
     }
 }

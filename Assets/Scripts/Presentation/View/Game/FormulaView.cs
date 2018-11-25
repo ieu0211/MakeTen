@@ -12,10 +12,10 @@ namespace MakeTen.Presentation.View.Game
         [SerializeField] private TextMeshProUGUI _LeftNumber;
         [SerializeField] private TextMeshProUGUI _RightNumber;
 
-        public void RenderFormula(FormulaModel formula)
+        public void RenderFormula(IFormulaModel formula)
         {
-            _LeftNumber.text = formula.leftNumber.ToString();
-            _RightNumber.text = formula.rightNumber.ToString();
+            _LeftNumber.text = formula.LeftNumber.ToString();
+            _RightNumber.text = formula.RightNumber.ToString();
         }
     }
 }
