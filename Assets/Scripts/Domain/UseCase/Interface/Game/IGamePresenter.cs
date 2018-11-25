@@ -12,5 +12,7 @@ namespace MakeTen.Domain.UseCase.Interface.Game
         void RenderFormula(IFormulaModel formula);
 
         IObservable<Enumerate.Operation> OnSelectOperation();
+        void Correct(Enumerate.Operation operation);
+        void Incorrect(Enumerate.Operation operation);
     }
 }

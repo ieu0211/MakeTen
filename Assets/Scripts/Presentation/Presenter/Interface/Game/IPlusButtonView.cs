@@ -6,5 +6,7 @@ namespace MakeTen.Presentation.Presenter.Interface.Game
     public interface IPlusButtonView : IView
     {
         IObservable<Enumerate.Operation> OnClickAsObservable();
+        void Correct();
+        void InCorrect();
     }
 }

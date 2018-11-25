@@ -86,7 +86,6 @@ namespace MakeTen.Domain.Model.Game
             
             new FormulaModel(2, 5, Enumerate.Operation.Multiply),
             new FormulaModel(5, 2, Enumerate.Operation.Multiply),
-            new FormulaModel(13, 2, Enumerate.Operation.Multiply),
             
             new FormulaModel(2 * 10, 2, Enumerate.Operation.Divide),
             new FormulaModel(3 * 10, 3, Enumerate.Operation.Divide),

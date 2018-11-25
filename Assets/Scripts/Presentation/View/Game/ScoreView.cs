@@ -11,7 +11,7 @@ namespace MakeTen.Presentation.View.Game
         
         public void RenderScore(int score)
         {
-            _Label.text = score.ToString();
+            _Label.text = $"{score}点";
         }
     }
 }

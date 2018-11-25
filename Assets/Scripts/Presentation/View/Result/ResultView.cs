@@ -10,7 +10,7 @@ namespace MakeTen.Domain.Model.Game
         
         public void RenderResult(int score)
         {
-            _score.text = score.ToString();
+            _score.text = $"{score}点";
         }
     }
 }

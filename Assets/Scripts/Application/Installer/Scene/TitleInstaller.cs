@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using MakeTen.Application.Manager;
 using MakeTen.Application.Presentation.Presenter.Interface.Title;
 using MakeTen.Domain.UseCase.Title;
 using MakeTen.Presentation.Title;
@@ -11,7 +12,7 @@ namespace MakeTen.Application.Installer.Scene
 {
     public sealed class TitleInstaller : MonoInstaller<TitleInstaller>
     {
-        [SerializeField] private StartButtonView _StartButttonView;
+        [SerializeField] private StartButtonView startButttonView;
         
         public override void InstallBindings()
         {
@@ -22,7 +23,7 @@ namespace MakeTen.Application.Installer.Scene
             Container.BindInterfacesTo<TitlePresenter>().AsCached();
 
             // Views
-            Container.BindInterfacesTo<StartButtonView>().FromInstance(_StartButttonView).AsCached();
+            Container.BindInterfacesTo<StartButtonView>().FromInstance(startButttonView).AsCached();
         }
     }
 }

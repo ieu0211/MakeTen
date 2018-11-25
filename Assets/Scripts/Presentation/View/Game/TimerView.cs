@@ -14,7 +14,7 @@ namespace MakeTen.Presentation.View.Game
 
         public void Render(float remainingTime)
         {
-            _Text.text = remainingTime.ToString();
+            _Text.text = $"{remainingTime:F2}秒";
         }
     }
 }

@@ -1,3 +1,4 @@
+using Application;
 using MakeTen.Application;
 using MakeTen.Domain.Model.Interface;
 using UniRx;
@@ -7,8 +8,8 @@ namespace MakeTen.Domain.Model.Game
     public interface IGameStateModel : IModel
     {
         IReactiveProperty<float> RemainingTime { get; }
-        ISubject<Unit> OnCorrectSubject { get; }
-        ISubject<Unit> OnIncorrectSubject { get; }
+        ISubject<Enumerate.Operation> OnCorrectSubject { get; }
+        ISubject<Enumerate.Operation> OnIncorrectSubject { get; }
     }
     
     public sealed class GameStateModel : IGameStateModel
@@ -19,7 +20,7 @@ namespace MakeTen.Domain.Model.Game
         }
         
         public IReactiveProperty<float> RemainingTime { get; }
-        public ISubject<Unit> OnCorrectSubject { get; } = new Subject<Unit>();
-        public ISubject<Unit> OnIncorrectSubject { get; } = new Subject<Unit>();
+        public ISubject<Enumerate.Operation> OnCorrectSubject { get; } = new Subject<Enumerate.Operation>();
+        public ISubject<Enumerate.Operation> OnIncorrectSubject { get; } = new Subject<Enumerate.Operation>();
     }
 }

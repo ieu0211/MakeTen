@@ -1,4 +1,5 @@
 using System;
+using MakeTen.Application.Manager;
 using MakeTen.Domain.Model.Game;
 using MakeTen.Domain.UseCase.Interface.Result;
 using UniRx;
@@ -6,8 +7,9 @@ using Zenject;
 
 namespace Presentation.Presenter.Result
 {
-    public class ResultPresenter : IResultPresenter
+    public class ResultPresenter : IResultPresenter, IInitializable
     {
+        [Inject] private SoundManager soundManager { get; }
         [Inject] private IResultView resultView;
         [Inject] private IReturnTitleButtonView returnTitleButtonView;
         [Inject] private IRetryButtonView retryButtonView;
@@ -25,6 +27,11 @@ namespace Presentation.Presenter.Result
         public IObservable<Unit> OnNavigateToGameAsObservable()
         {
             return retryButtonView.OnClickAsObservable();
+        }
+        
+        public void Initialize()
+        {
+            soundManager.PlayResultBgm();
         }
     }
 }

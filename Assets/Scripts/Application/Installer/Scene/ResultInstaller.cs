@@ -1,6 +1,7 @@
 using MakeTen.Domain.Model.Game;
 using Domain.UseCase.Result;
 using Maketen.Data.Repository.Game;
+using MakeTen.Application.Manager;
 using MakeTen.Domain.Translator.Game;
 using Presentation.Presenter.Result;
 using UnityEngine;

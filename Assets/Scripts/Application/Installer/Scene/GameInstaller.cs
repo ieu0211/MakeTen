@@ -1,5 +1,6 @@
 using Maketen.Data.Repository.Game;
 using MaketTen.Data.Entity.Game;
+using MakeTen.Application.Manager;
 using MakeTen.Domain.Model.Game;
 using MakeTen.Domain.Translator.Game;
 using MakeTen.Domain.Translator.Interface;
@@ -46,7 +47,6 @@ namespace MakeTen.Application.Installer.Scene
             Container.BindInterfacesTo<MinusButtonView>().FromInstance(minusButtonView).AsCached();
             Container.BindInterfacesTo<MultiplyButtonView>().FromInstance(multiplyButtonView).AsCached();
             Container.BindInterfacesTo<DivideButtonView>().FromInstance(divideButtonView).AsCached();
-            
         }
     }
 }

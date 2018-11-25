@@ -70,15 +70,15 @@ namespace MakeTen.Domain.UseCase.Game
                     Debug.LogError(x);
                     
                     if (currentFormulaModel.Value.IsCorrect(x))
-                        gameStateModel.OnCorrectSubject.OnNext(Unit.Default);
+                        gameStateModel.OnCorrectSubject.OnNext(x);
                     else
-                        gameStateModel.OnIncorrectSubject.OnNext(Unit.Default);
+                        gameStateModel.OnIncorrectSubject.OnNext(x);
                 });
-            
+
             gameStateModel
                 .OnCorrectSubject
-                .Subscribe(_ => currentFormulaModel.Value = FormulaModelFactory.Create());
-
+                .Subscribe(x => gamePresenter.Correct(x));
+            
             gameStateModel
                 .OnCorrectSubject
                 .Subscribe(_ => IncreaseScore(gameResultModel));
@@ -86,6 +86,14 @@ namespace MakeTen.Domain.UseCase.Game
             gameResultModel
                 .Score
                 .Subscribe(x => gamePresenter.RenderScore(x));
+            
+            gameStateModel
+                .OnCorrectSubject
+                .Subscribe(_ => currentFormulaModel.Value = FormulaModelFactory.Create());
+            
+            gameStateModel
+                .OnIncorrectSubject
+                .Subscribe(x => gamePresenter.Incorrect(x));
         }
 
         private void NavigateToResult(IGameResultModel gameResultModel)

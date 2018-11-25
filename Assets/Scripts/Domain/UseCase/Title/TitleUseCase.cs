@@ -1,5 +1,6 @@
 using System;
 using MakeTen.Application;
+using MakeTen.Application.Manager;
 using MakeTen.Application.Presentation.Presenter.Interface.Title;
 using MakeTen.Domain.UseCase.Interface.Title;
 using TMPro;
@@ -17,17 +18,16 @@ namespace MakeTen.Domain.UseCase.Title
     
     public sealed class TitleUseCase : ITitleUseCase, IInitializable
     {
-        [Inject]
-        private ITitlePresenter _TitlePresenter { get; }
+        [Inject] private ITitlePresenter titlePresenter { get; }
         
         public void Initialize()
         {
-            _TitlePresenter.OnNavigateToGameAsObservable().Subscribe(_ => NavigateToGame());
+            titlePresenter.OnNavigateToGameAsObservable().Subscribe(_ => NavigateToGame());
         }
 
-        private static async UniTask NavigateToGame()
+        private void NavigateToGame()
         {
-            await SceneManager.LoadSceneAsync(Constant.SceneName.Game);
+            SceneManager.LoadSceneAsync(Constant.SceneName.Game);
         }
     }
 }
